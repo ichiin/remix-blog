@@ -2,9 +2,6 @@ import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 
 async function seed() {
-  await new Promise(() => {
-    db.user.create({data: createUser()})
-  })
   await Promise.all(
     getPosts().map((post) => {
       return db.post.create({ data: post });
@@ -13,13 +10,6 @@ async function seed() {
 }
 
 seed();
-
-function createUser() {
-    return {
-        name: "takky",
-        email: "philippeduvalts2@gmail.com"
-    }
-}
 
 function getPosts() {
   return [
